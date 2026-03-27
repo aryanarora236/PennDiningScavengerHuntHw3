@@ -57,11 +57,6 @@ struct DiningHallDetailView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Text(debugLocationText(for: hall))
-                .font(.caption.monospacedDigit())
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-
             Text(statusMessage)
                 .foregroundStyle(statusColor)
                 .multilineTextAlignment(.center)
@@ -73,19 +68,6 @@ struct DiningHallDetailView: View {
             .disabled(hall.isCollected)
         }
         .padding()
-    }
-
-    private func debugLocationText(for hall: DiningHall) -> String {
-        let target = String(format: "Target: %.5f, %.5f", hall.latitude, hall.longitude)
-        if let userLocation = locationManager.userLocation {
-            let current = String(
-                format: "Current: %.5f, %.5f",
-                userLocation.coordinate.latitude,
-                userLocation.coordinate.longitude
-            )
-            return "\(current)\n\(target)"
-        }
-        return "Current: unavailable\n\(target)"
     }
 
     private func collectionStatusPill(for hall: DiningHall) -> some View {
